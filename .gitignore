@@ -1,5 +1,12 @@
 node_modules
 
+# Ignore SQLite database files
+*.sqlite
+*.sqlite3
+*.db
+*.db-wal
+*.db-shm
+
 ### VisualStudioCode ###
 .vscode/*
 !.vscode/settings.json
