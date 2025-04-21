@@ -8,6 +8,7 @@ const sequelize = require('./db');
 const Signature = require('./models/Signature');
 
 var indexRouter = require('./routes/index');
+var apiRouter = require('./routes/api/api');
 
 var app = express();
 
@@ -22,6 +23,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
+app.use('/api', apiRouter);
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
@@ -39,14 +41,14 @@ app.use(function(err, req, res, next) {
   res.render('error');
 });
 
-// async function setup() {
-//   const ant = await Signature.create({ name: "Ant", email: "email@email.com", city: "Seattle", state: "WA" });
-//   console.log("Ant instance created.")
-// }
+async function setup() {
+  const ant = await Signature.create({ name: "Ant", email: "email@email.com", city: "Seattle", state: "WA" });
+  console.log("Ant instance created.")
+}
 
 sequelize.sync({ force: true }).then(() => {
   console.log("Sequelize Sync completed");
-  // setup().then(() => console.log("Setup completed."));
+  setup().then(() => console.log("Setup completed."));
 })
 
 module.exports = app;
