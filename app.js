@@ -6,6 +6,7 @@ var logger = require('morgan');
 const session = require("express-session");
 const sequelize = require('./db');
 const Signature = require('./models/Signature');
+const cors = require('cors');
 
 var indexRouter = require('./routes/index');
 var apiRouter = require('./routes/api/api');
@@ -21,6 +22,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 app.use('/', indexRouter);
 app.use('/api', apiRouter);
@@ -42,7 +44,7 @@ app.use(function(err, req, res, next) {
 });
 
 async function setup() {
-  const ant = await Signature.create({ name: "Ant", email: "email@email.com", city: "Seattle", state: "WA" });
+  const ant = await Signature.create({ name: "Ant", email: "ant@ant.com", city: "Seattle", state: "WA" });
   console.log("Ant instance created.")
 }
 
