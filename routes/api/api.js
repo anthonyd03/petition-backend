@@ -9,7 +9,7 @@
 
 const express = require('express');
 const router = express.Router();
-const sigApiRouter = require('./signaturesApi');
+const sigApiRouter = require('./signatures');
 
 router.use("/signatures", sigApiRouter);
 
